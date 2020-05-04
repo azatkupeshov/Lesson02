@@ -30,9 +30,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.contact, parent, false);
 
-        
-        MyHolder myHolder = new MyHolder(v);
-        return myHolder;
+        //Возвращаем созданный MyHolder содержащий в себе ссылки на TextView объекты name и phone
+        return new MyHolder(v);
     }
 
     /**

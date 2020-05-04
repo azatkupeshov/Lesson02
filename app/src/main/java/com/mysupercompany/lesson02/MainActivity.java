@@ -1,7 +1,12 @@
 package com.mysupercompany.lesson02;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +39,35 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private List<Contact> initDatabase(){
+    //Метод создающий меню приложения
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Получаем menuInflater, компонент который загружает меню из xml файла.
+        MenuInflater inflater = getMenuInflater();
+        //Загружаем меню из xml файла
+        inflater.inflate(R.menu.menu, menu);
+        //Возвращаем значение true, которое уведомляет систему андроид создать меню для приложения
+        return true;
+    }
+
+    //Метот обрабатывающий клики на пункты меню.
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Извлекаем ID пункта меню и ищем подходящий case.
+        switch (item.getItemId()) {
+            case R.id.exit:
+                finish();
+                return true;
+            case R.id.setting:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private List<Contact> initDatabase() {
         contacts = new ArrayList<>();
         contacts.add(new Contact("Ваня", "+77771324567"));
         contacts.add(new Contact("Петя", "+77771324568"));
